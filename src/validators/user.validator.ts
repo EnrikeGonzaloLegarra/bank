@@ -11,4 +11,12 @@ export const createUserSchema = object({
 
     }),
 });
-
+export const createUserSessionSchema = object({
+    body: object({
+        password: string()
+            .required("Password is required")
+            .min(14, "Password is too short - should be 14 chars."),
+        name: string()
+            .required("Name is required"),
+    }),
+});

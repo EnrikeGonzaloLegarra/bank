@@ -1,4 +1,4 @@
-import {DocumentDefinition, FilterQuery, QueryOptions, UpdateQuery} from "mongoose";
+import {DocumentDefinition} from "mongoose";
 import User, {UserDocument} from "../models/user.model";
 
 export async function createUser(input: DocumentDefinition<UserDocument>) {
@@ -10,3 +10,19 @@ export async function createUser(input: DocumentDefinition<UserDocument>) {
     }
 }
 
+
+export async function validatePassword({name, password,}: { name: UserDocument["name"]; password: string; }) {
+    const user = await User.findOne({name});
+
+    if (!user) {
+        return false;
+    }
+
+    const isValid = await user.comparePassword(password);
+
+    if (!isValid) {
+        return false;
+    }
+
+    return user.toJSON();
+}
