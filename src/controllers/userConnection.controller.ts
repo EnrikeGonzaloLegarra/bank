@@ -2,7 +2,10 @@ import {Request, Response} from "express";
 import {get} from "lodash";
 import {findUser} from "../services/user.service";
 import UserConnection from "../models/UserConnection.model";
-import {createUserConnection, validateConnection} from "../services/userConnection.service";
+import {
+    createUserConnection,
+    deleteConnection, existConnection
+} from "../services/userConnection.service";
 import {LeanDocument} from "mongoose";
 import {UserDocument} from "../models/User.model";
 
@@ -12,7 +15,7 @@ export async function sendConnectionRequestHandler(req: Request, res: Response) 
         const sender: LeanDocument<UserDocument> = await findUser({userId: userId.name});
         const receiver: LeanDocument<UserDocument> = await findUser({accountNumber: req.params.accountNumber});
         if (sender && receiver) {
-            if (await IsValidateConnection(sender.id, receiver.id)) {
+            if (!await areUsersConnected(sender._id, receiver._id)) {
                 const connection = await createUserConnection(new UserConnection({sender: sender, receiver: receiver}));
                 return res.status(200).send(connection);
             } else {
@@ -27,6 +30,26 @@ export async function sendConnectionRequestHandler(req: Request, res: Response) 
     }
 }
 
-async function IsValidateConnection(senderId: number, receiverId: number): Promise<boolean> {
-    return validateConnection({userRequest: senderId, userResponse: receiverId});
+export async function deleteConnectionHandler(req: Request, res: Response) {
+    try {
+        const userId = get(req, "user");
+        const sender: LeanDocument<UserDocument> = await findUser({userId: userId.name});
+        const receiver: LeanDocument<UserDocument> = await findUser({accountNumber: req.params.accountNumber});
+
+        if (await areUsersConnected(sender._id, receiver._id)) {
+            await deleteConnection({sender: sender._id, receiver: receiver._id});
+            return res.status(200).send(`The connection with user with account number ${receiver.accountNumber} has been deleted`);
+        } else {
+            return res.status(200).send(`You are not connecting with the user with account number ${receiver.accountNumber}`);
+        }
+
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send(e);
+    }
+
+}
+
+async function areUsersConnected(senderId: number, receiverId: number): Promise<boolean> {
+    return existConnection({sender: senderId, receiver: receiverId});
 }
