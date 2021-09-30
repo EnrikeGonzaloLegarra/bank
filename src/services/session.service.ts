@@ -1,8 +1,8 @@
 import {LeanDocument} from "mongoose";
 import config from "config";
 import {signJwt} from "../utils/jwt.utils";
-import Session, {SessionDocument} from "../models/session.model";
-import {UserDocument} from "../models/user.model";
+import Session, {SessionDocument} from "../models/Session.model";
+import {UserDocument} from "../models/User.model";
 
 export async function createSession(userId: string, userAgent: string) {
     const session = await Session.create({user: userId, userAgent});
