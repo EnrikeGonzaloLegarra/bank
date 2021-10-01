@@ -1,13 +1,12 @@
 import {Request, Response} from "express";
 import {LeanDocument} from "mongoose";
-import {existConnection} from "../services/userConnection.service";
-import {UserDocument} from "../models/User.model";
-import {findAndUpdateUser, findUser} from "../services/user.service";
-import Transaction, {TransactionDocument} from "../models/Transaction.model";
-import {calculateTransaction, createTransaction} from "../services/transaction.service";
 import {get} from "lodash";
 import * as fs from "fs";
 import stringify from 'csv-stringify';
+
+import {TransactionDocument, UserDocument} from "../models";
+import {calculateTransaction, createTransaction, existConnection, findAndUpdateUser, findUser} from "../services";
+import Transaction from "../models/Transaction.model";
 
 
 export async function sendTransactionHandler(req: Request, res: Response) {
@@ -62,7 +61,8 @@ async function updateAccount(senderId: number, receiverId: number, amount: numbe
 
     }
 }
-export async function calculateAccount(req: Request, res: Response): Promise<any> {
+
+export async function calculateAccountHandler(req: Request, res: Response): Promise<any> {
 
     const cal = await calculateTransaction();
     return res.status(200).send(cal);
@@ -87,7 +87,7 @@ async function updateReceiverWhitAmount(receiver: LeanDocument<UserDocument>, am
 
 }
 
- interface CsvData {
+interface CsvData {
     sender: string,
     receiver: string,
     amount: number,
@@ -103,20 +103,20 @@ async function writeFile(transaction: TransactionDocument) {
         amount: 'amount',
         timestamp: 'timestamp'
     };
-    if (!fs.existsSync('my1.csv')) {
+    if (!fs.existsSync('transactions.csv')) {
         stringify(data, {header: true, columns: columns}, (err, output) => {
             if (err) throw err;
-            fs.writeFile('my1.csv', output, (err) => {
+            fs.writeFile('transactions.csv', output, (err) => {
                 if (err) throw err;
-                console.log('my.csv1 saved.');
+                console.log('transactions.csv saved.');
             });
         });
     } else {
         stringify(data, (err, output) => {
             if (err) throw err;
-            fs.appendFile('my1.csv', output, (err) => {
+            fs.appendFile('transactions.csv', output, (err) => {
                 if (err) throw err;
-                console.log('my1.csv saved.');
+                console.log('transactions.csv saved.');
             });
         });
     }

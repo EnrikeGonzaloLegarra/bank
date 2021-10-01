@@ -1,13 +1,14 @@
 import {Request, Response} from "express";
 import {get} from "lodash";
-import {findUser} from "../services/user.service";
 import UserConnection from "../models/UserConnection.model";
 import {
     createUserConnection,
-    deleteConnection, existConnection
-} from "../services/userConnection.service";
+    deleteConnection,
+    existConnection,
+    findUser
+} from "../services";
 import {LeanDocument} from "mongoose";
-import {UserDocument} from "../models/User.model";
+import {UserDocument} from "../models";
 
 export async function sendConnectionRequestHandler(req: Request, res: Response) {
     try {

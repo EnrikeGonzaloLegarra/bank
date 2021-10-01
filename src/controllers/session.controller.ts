@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
-import {validatePassword} from "../services/user.service";
-import {createAccessToken, createSession} from "../services/session.service";
+import {validatePassword, createAccessToken, createSession} from "../services";
 
 
 export async function createSessionHandler(req: Request, res: Response) {

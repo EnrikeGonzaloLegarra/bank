@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import {UserDocument} from './User.model';
+import {UserDocument} from "./User.model";
 
 export interface TransactionDocument extends mongoose.Document {
     sender: UserDocument['_id'];
