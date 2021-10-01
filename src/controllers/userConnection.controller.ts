@@ -16,7 +16,8 @@ export async function sendConnectionRequestHandler(req: Request, res: Response) 
         const receiver: LeanDocument<UserDocument> = await findUser({accountNumber: req.params.accountNumber});
         if (sender && receiver) {
             if (!await areUsersConnected(sender._id, receiver._id)) {
-                const connection = await createUserConnection(new UserConnection({sender: sender, receiver: receiver}));
+                const connection =
+                    await createUserConnection(new UserConnection({sender: sender, receiver: receiver}));
                 return res.status(200).send(connection);
             } else {
                 return res.send(`User ${sender.name} with account number ${sender.accountNumber} is already connected to user ${receiver.name} with account number ${receiver.accountNumber}`);

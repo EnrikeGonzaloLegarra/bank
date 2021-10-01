@@ -1,6 +1,6 @@
 import Transaction, {TransactionDocument} from "../models/Transaction.model";
 
-export async function createAccount(account: TransactionDocument) {
+export async function createTransaction(account: TransactionDocument) {
     try {
         return await Transaction.create(account);
     } catch (error) {

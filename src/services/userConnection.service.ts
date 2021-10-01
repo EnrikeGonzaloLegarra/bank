@@ -21,6 +21,5 @@ export async function existConnection(query: FilterQuery<UserConnectionDocument>
 }
 
 export async function deleteConnection(query: FilterQuery<UserConnectionDocument>) {
-
     return UserConnection.deleteOne(query);
 }

@@ -1,4 +1,4 @@
-import {DocumentDefinition, FilterQuery, LeanDocument} from "mongoose";
+import {DocumentDefinition, FilterQuery, LeanDocument, QueryOptions, UpdateQuery} from "mongoose";
 import User, {UserDocument} from "../models/User.model";
 
 export async function createUser(input: DocumentDefinition<UserDocument>) {
@@ -31,3 +31,8 @@ export async function validatePassword({name, password,}: { name: UserDocument["
 }
 
 
+export function findAndUpdateUser(query: FilterQuery<UserDocument>,
+                                  update: UpdateQuery<UserDocument>,
+                                  options: QueryOptions) {
+    return User.findOneAndUpdate(query, update, options);
+}
