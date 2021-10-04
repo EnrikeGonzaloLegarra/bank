@@ -1,5 +1,5 @@
 {
-  "name": "banktest",
+  "name": "bank",
   "author": "Enrike",
   "version": "1.0.0",
   "main": "dist/index.js",
@@ -9,7 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "@types/mongodb": "^4.0.7",
-    "bcrypt": "^5.0.1",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "csv-stringify": "^5.6.5",
@@ -20,7 +19,6 @@
     "lodash": "^4.17.21",
     "mongoose": "^5.12.7",
     "nanoid": "^3.1.22",
-    "node-csv": "^0.1.2",
     "nodemon": "^2.0.12",
     "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
