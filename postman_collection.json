@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "1741445c-1f32-412e-b88d-761c382aa9d2",
+		"name": "BANK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/api/create/user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"User 11\",\r\n\"lastName\":\"User 11\",\r\n\"accountBalance\":10000\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/create/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"create",
+						"user"
+					]
+				},
+				"description": "Create User"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJFbnJpcXVlIiwibGFzdE5hbWUiOiJHb256YWxvIExlZ2FycmEifSwic2Vzc2lvbiI6IjYxMzNhY2IyZjAwN2FhM2Y1MGI4ODE5MiIsImlhdCI6MTYzMDc3NjQ5OCwiZXhwIjoxNjMwNzc2NTU4fQ.ESAA-jBeTKW3K-muaJ7t3Gwq4C1bP3l4hFSJQmAgOO8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Juan\",\r\n\t\"password\": \"m8R6LnciDSs<av\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Login"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/sendConnection/4238972510",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJHYXJjaWEiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTE5VDE3OjI1OjAzLjk1M1oiLCJhY2NvdW50TnVtYmVyIjoiMzc1MDA0OTA4NiJ9LCJzZXNzaW9uIjoiNjE1OWZjOTQ5MDIwN2Q2ODQ0ZjYzNzJmIiwiaWF0IjoxNjMzMjg3MzE2LCJleHAiOjE2MzMyODgyMTZ9.vxHF6pKdS45uualFG8E0RPam9jrZl3_MH0qbHykSb2Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/send-connection/5636765320",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"send-connection",
+						"5636765320"
+					]
+				},
+				"description": "Get connections list"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/send-money",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJVc2VyMSIsImxhc3ROYW1lIjoiVXNlcjEiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTA5VDE1OjEyOjI0LjA1MloiLCJhY2NvdW50TnVtYmVyIjoiNzM0ODc2ODMwNSJ9LCJzZXNzaW9uIjoiNjE0MDg5MmIyN2YzNWFkOTZjYWQyMjk3IiwiaWF0IjoxNjMxNjE5MzcyLCJleHAiOjIxMDQ5ODMzNzJ9.LMqTIPfCPDXGEkGFWYD-WehJtFGF9u9z41dPJmEMVkY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\":\"7342705360\",\r\n    \"amount\":\"100\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/send-money",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"send-money"
+					]
+				},
+				"description": "Send money to a user by account number"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/calculate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJVc2VyIDExIiwibGFzdE5hbWUiOiJVc2VyIDExIiwiY3JlYXRlZEF0IjoiMjAyMS0xMC0wM1QxODoyNjoyNy43NTdaIiwiYWNjb3VudE51bWJlciI6Ijk4NTU1MjQ5NDAifSwic2Vzc2lvbiI6IjYxNTlmNmI2MGE1NDU4NDEzNGMyY2YzNyIsImlhdCI6MTYzMzI4NTgxNCwiZXhwIjoxNjMzMjg1ODc0fQ.k9V-v1DJKa614jYsrRNEMznlQQ2KNPAhjJ2E9NDxj7U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/calculate",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"calculate"
+					]
+				},
+				"description": "Calculate bank profit\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/connection/list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJHYXJjaWEiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTE5VDE3OjI1OjAzLjk1M1oiLCJhY2NvdW50TnVtYmVyIjoiMzc1MDA0OTA4NiJ9LCJzZXNzaW9uIjoiNjE1OWZjOTQ5MDIwN2Q2ODQ0ZjYzNzJmIiwiaWF0IjoxNjMzMjg3MzE2LCJleHAiOjE2MzMyODgyMTZ9.vxHF6pKdS45uualFG8E0RPam9jrZl3_MH0qbHykSb2Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/connection/list",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"connection",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/send-connection/7342705360",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJFbnJpa2UiLCJsYXN0TmFtZSI6IkdvbnphbG8iLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTE5VDE3OjI1OjE0LjI5MFoiLCJhY2NvdW50TnVtYmVyIjoiNTYzNjc2NTMyMCJ9LCJzZXNzaW9uIjoiNjE0NzcyOTcwODZjNWE3MGMwMTE4NTYwIiwiaWF0IjoxNjMyMDcyMzQzLCJleHAiOjIxMDU0MzYzNDN9.PBJQ82ClN6NrRWZJguujLGOCz_jfF8MIBK56zf2MD24",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/send-connection/7342705360",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"send-connection",
+						"7342705360"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "User 1 Token",
+			"value": "eyJ1c2VyIjp7Im5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJHYXJjaWEiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTE5VDE3OjI1OjAzLjk1M1oiLCJhY2NvdW50TnVtYmVyIjoiMzc1MDA0OTA4NiJ9LCJzZXNzaW9uIjoiNjE1OWZjOTQ5MDIwN2Q2ODQ0ZjYzNzJmIiwiaWF0IjoxNjMzMjg3MzE2LCJleHAiOjE2MzMyODgyMTZ9"
+		},
+		{
+			"key": "User2Token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+		}
+	]
+}
