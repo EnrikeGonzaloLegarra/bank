@@ -11,13 +11,15 @@ export async function createUserConnection(params: UserConnectionDocument) {
 export async function findConnection(query: FilterQuery<UserConnectionDocument>) {
     return UserConnection.find({sender: query.sender, receiver: query.receiver}).populate("receiver").lean();
 }
-
+export async function findConnectionList(query: FilterQuery<UserConnectionDocument>) {
+    return UserConnection.find({ $or: [{sender: query.sender}, { receiver: query.receiver }] }).populate("receiver").populate('sender').lean();
+}
 export async function validateConnection(query: FilterQuery<UserConnectionDocument>): Promise<boolean> {
     return await UserConnection.find(query).countDocuments() === 0;
 }
 
 export async function existConnection(query: FilterQuery<UserConnectionDocument>): Promise<boolean> {
-    return await UserConnection.exists(query);
+    return await UserConnection.exists({ $or: [{sender: query.sender}, { receiver: query.receiver }] });
 }
 
 export async function deleteConnection(query: FilterQuery<UserConnectionDocument>) {

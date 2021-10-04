@@ -4,7 +4,7 @@ import UserConnection from "../models/UserConnection.model";
 import {
     createUserConnection,
     deleteConnection,
-    existConnection,
+    existConnection, findConnection, findConnectionList,
     findUser
 } from "../services";
 import {LeanDocument} from "mongoose";
@@ -13,7 +13,7 @@ import {UserDocument} from "../models";
 export async function sendConnectionRequestHandler(req: Request, res: Response) {
     try {
         const userId = get(req, "user");
-        const sender: LeanDocument<UserDocument> = await findUser({userId: userId.name});
+        const sender: LeanDocument<UserDocument> = await findUser({name: userId.user.name});
         const receiver: LeanDocument<UserDocument> = await findUser({accountNumber: req.params.accountNumber});
         if (sender && receiver) {
             if (!await areUsersConnected(sender._id, receiver._id)) {
@@ -35,7 +35,7 @@ export async function sendConnectionRequestHandler(req: Request, res: Response) 
 export async function deleteConnectionHandler(req: Request, res: Response) {
     try {
         const userId = get(req, "user");
-        const sender: LeanDocument<UserDocument> = await findUser({userId: userId.name});
+        const sender: LeanDocument<UserDocument> = await findUser({name: userId.user.name});
         const receiver: LeanDocument<UserDocument> = await findUser({accountNumber: req.params.accountNumber});
 
         if (await areUsersConnected(sender._id, receiver._id)) {
@@ -50,6 +50,22 @@ export async function deleteConnectionHandler(req: Request, res: Response) {
         return res.status(500).send(e);
     }
 
+}
+
+export async function userConnectionListHandler(req: Request, res: Response) {
+    try {
+        const userReq = get(req, "user");
+        const user = await findUser({name: userReq.user.name});
+        if (user) {
+            const connectionList = await findConnectionList({sender: user._id, receiver: user._id})
+            return res.send(connectionList);
+
+        }
+    } catch (e) {
+        console.error(e);
+        // @ts-ignore
+        return res.status(e.status).send(e);
+    }
 }
 
 async function areUsersConnected(senderId: number, receiverId: number): Promise<boolean> {

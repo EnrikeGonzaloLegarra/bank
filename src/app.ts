@@ -2,9 +2,10 @@ import express from "express";
 import connect from "./db/connect";
 import routes from "./routes";
 import deserializeUser from "./middleware/deserializeUser";
+import 'dotenv/config'
 
-const port = 3000;
-const host = 'localhost';
+const port = Number(process.env.DB_PORT);
+const host = String(process.env.DB_HOST);
 
 const app = express();
 app.use(deserializeUser);

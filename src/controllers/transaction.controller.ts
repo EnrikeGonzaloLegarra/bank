@@ -12,7 +12,7 @@ import Transaction from "../models/Transaction.model";
 export async function sendTransactionHandler(req: Request, res: Response) {
     try {
         const senderId = get(req, "user");
-        const sender = await findUser({userId: senderId.name});
+        const sender = await findUser({name: senderId.user.name});
         const receiver = await findUser({accountNumber: req.body.accountNumber});
 
         if (await IsValidateConnection(sender?._id, receiver?._id)) {
@@ -63,13 +63,12 @@ async function updateAccount(senderId: number, receiverId: number, amount: numbe
 }
 
 export async function calculateAccountHandler(req: Request, res: Response): Promise<any> {
-
     const cal = await calculateTransaction();
     return res.status(200).send(cal);
 }
 
 function hasAmount(accountAmount: number, amount: number) {
-    return amount <= accountAmount;
+    return amount <= accountAmount && amount > 0;
 }
 
 async function IsValidateConnection(senderId: number, receiverId: number): Promise<boolean> {
